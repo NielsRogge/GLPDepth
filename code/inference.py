@@ -51,7 +51,7 @@ def main():
     h, w, c = image.shape
     new_h, new_w = h // 32 * 32, w // 32 * 32
     image = cv2.resize(image, (new_w, new_h))
-    pixel_values = transforms.ToTensor()(img).unsqueeze(0)
+    pixel_values = transforms.ToTensor()(image).unsqueeze(0)
 
     with torch.no_grad():
         pred = model(pixel_values)
