@@ -6,6 +6,7 @@ import os
 import cv2
 import numpy as np
 from collections import OrderedDict
+from torchvision import transforms
 
 import torch
 from torch.utils.data import DataLoader
@@ -60,7 +61,7 @@ def main():
     img = cv2.imread(args.image_path)  # [H x W x C] and C: BGR
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img = cropping(img)
-    pixel_values = ToTensor()(img).unsqueeze(0)
+    pixel_values = transforms.ToTensor()(img).unsqueeze(0)
 
     with torch.no_grad():
         pred = model(pixel_values)
