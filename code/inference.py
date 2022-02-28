@@ -22,19 +22,6 @@ metric_name = ['d1', 'd2', 'd3', 'abs_rel', 'sq_rel', 'rmse', 'rmse_log',
                'log10', 'silog']
 
 
-# kb cropping
-def cropping(img):
-    h_im, w_im = img.shape[:2]
-
-    margin_top = int(h_im - 352)
-    margin_left = int((w_im - 1216) / 2)
-
-    img = img[margin_top: margin_top + 352,
-              margin_left: margin_left + 1216]
-
-    return img
-
-
 def main():
     # experiments setting
     opt = TestOptions()
@@ -58,9 +45,12 @@ def main():
 
     print("\n3. Inference")
     
-    img = cv2.imread(args.image_path)  # [H x W x C] and C: BGR
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    #img = cropping(img)
+    image = cv2.imread(args.image_path)  # [H x W x C] and C: BGR
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    # input size should be multiple of 32
+    h, w, c = image.shape
+    new_h, new_w = h // 32 * 32, w // 32 * 32
+    image = cv2.resize(image, (new_w, new_h))
     pixel_values = transforms.ToTensor()(img).unsqueeze(0)
 
     with torch.no_grad():
