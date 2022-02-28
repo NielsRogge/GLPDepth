@@ -68,7 +68,7 @@ def main():
     pred_d = pred['pred_d']
         
     if args.save_visualize:
-        save_path = os.path.join(result_path)
+        save_path = os.path.join(result_path, "prediction.png")
         pred_d_numpy = pred_d.squeeze().cpu().numpy()
         pred_d_numpy = (pred_d_numpy / pred_d_numpy.max()) * 255
         pred_d_numpy = pred_d_numpy.astype(np.uint8)
