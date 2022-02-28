@@ -14,9 +14,10 @@ class TestOptions(BaseOptions):
         parser.add_argument('--save_visualize', action='store_true',
                             help='save result image into visulized form')
         parser.add_argument('--do_evaluate',    action='store_true',
-                            help='evaluate with inferenced images')        
+                            help='evaluate with inferenced images')   
+        parser.add_argument('--image_path', type=str)
 
-        
+
         
         return parser
 
