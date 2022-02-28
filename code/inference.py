@@ -30,11 +30,11 @@ def main():
 
     device = torch.device('cpu')
 
-    if args.save_visualize:
+    if args.result_dir is not None:
         result_path = os.path.join(args.result_dir)
         logging.check_and_make_dirs(result_path)
         print("Saving result images in to %s" % result_path)
-
+            
     print("\n1. Define Model")
     model = GLPDepth(max_depth=args.max_depth, is_train=False).to(device)
     model_weight = torch.load(args.ckpt_dir, map_location="cpu")
