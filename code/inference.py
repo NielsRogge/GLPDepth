@@ -40,11 +40,7 @@ def main():
     args = opt.initialize().parse_args()
     print(args)
 
-    if args.gpu_or_cpu == 'gpu':
-        device = torch.device('cuda')
-        cudnn.benchmark = True
-    else:
-        device = torch.device('cpu')
+    device = torch.device('cpu')
 
     if args.save_visualize:
         result_path = os.path.join(args.result_dir)
@@ -53,7 +49,7 @@ def main():
 
     print("\n1. Define Model")
     model = GLPDepth(max_depth=args.max_depth, is_train=False).to(device)
-    model_weight = torch.load(args.ckpt_dir)
+    model_weight = torch.load(args.ckpt_dir, map_location="cpu")
     if 'module' in next(iter(model_weight.items()))[0]:
         model_weight = OrderedDict((k[7:], v) for k, v in model_weight.items())
     model.load_state_dict(model_weight)
