@@ -67,7 +67,7 @@ def main():
         pred = model(pixel_values)
     pred_d = pred['pred_d']
         
-    if args.save_visualize:"
+    if args.save_visualize:
         save_path = os.path.join(result_path)
         pred_d_numpy = pred_d.squeeze().cpu().numpy()
         pred_d_numpy = (pred_d_numpy / pred_d_numpy.max()) * 255
