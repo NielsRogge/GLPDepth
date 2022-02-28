@@ -56,6 +56,8 @@ def main():
     with torch.no_grad():
         pred = model(pixel_values)
     pred_d = pred['pred_d']
+
+    print("First values of logits:", pred_d[0,0,:3,:3])
         
     filename = "result.png"
     if args.save_eval_pngs:
