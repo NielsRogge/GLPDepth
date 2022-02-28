@@ -60,7 +60,7 @@ def main():
     
     img = cv2.imread(args.image_path)  # [H x W x C] and C: BGR
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    img = cropping(img)
+    #img = cropping(img)
     pixel_values = transforms.ToTensor()(img).unsqueeze(0)
 
     with torch.no_grad():
