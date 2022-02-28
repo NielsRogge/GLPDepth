@@ -67,8 +67,8 @@ def main():
         pred = model(pixel_values)
     pred_d = pred['pred_d']
         
-    if args.save_visualize:
-        save_path = os.path.join(result_path, filename[0])
+    if args.save_visualize:"
+        save_path = os.path.join(result_path)
         pred_d_numpy = pred_d.squeeze().cpu().numpy()
         pred_d_numpy = (pred_d_numpy / pred_d_numpy.max()) * 255
         pred_d_numpy = pred_d_numpy.astype(np.uint8)
